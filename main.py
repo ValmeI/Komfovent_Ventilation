@@ -1,4 +1,4 @@
-from Komfovent_Ventilation.functions import get_vent_stats, add_xpos_in_list, column_width, create_excel, write_to_excel
+from functions import get_vent_stats, add_xpos_in_list, column_width, create_excel, write_to_excel
 import datetime
 
 '# get today-s datetime but without milliseconds'
