@@ -4,7 +4,7 @@ import datetime
 '# get today-s datetime but without milliseconds'
 today_str = datetime.datetime.now().isoformat(' ', 'seconds')
 
-'# add data from api-s to one big list'
+'# add data from api-s to one big list. You need to know your ventilation local IP aadress'
 combined_data_list = get_vent_stats("http://192.168.1.60/", 'det') + \
                      get_vent_stats("http://192.168.1.60/", 'i2') + \
                      get_vent_stats("http://192.168.1.60/", 'i')
