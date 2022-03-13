@@ -7,7 +7,6 @@ from selenium.webdriver.chrome.options import Options
 
 import xml.etree.ElementTree as ET
 import chromedriver_autoinstaller
-import time
 
 '''Check if the current version of chromedriver exists
 and if it doesn't exist, download it automatically,
