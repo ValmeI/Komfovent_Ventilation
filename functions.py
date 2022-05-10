@@ -8,6 +8,8 @@ from selenium.webdriver.chrome.options import Options
 import xml.etree.ElementTree as ET
 import chromedriver_autoinstaller
 
+import re
+
 '''Check if the current version of chromedriver exists
 and if it doesn't exist, download it automatically,
 then add chromedriver to path'''
@@ -18,31 +20,31 @@ chromedriver_autoinstaller.install()
 '# Excel headers'
 excel_headers = [  # Columns from url/det.asp
                  "Reading Date",
-                 "Supply temperature",
-                 "Extract temperature",
-                 "Outdoor temperature",
+                 "Supply temperature - °C",
+                 "Extract temperature Extract temperature - °C",
+                 "Outdoor temperature - °C",
                  "WT",
-                 "Panel temperature 1",
-                 "Panel temperature 2",
-                 "Panel humidity RH 1",
-                 "Panel humidity RH 2",
-                 "Supply fan",
-                 "Exhaust fan",
-                 "SP",
-                 "EP",
-                 "SFI",
-                 "EFI",
-                 "S1",
-                 "S2",
-                 "Heat exchanger",
-                 "WC",
-                 "Electric heater",
-                 "DX",
-                 "Air dampers",
-                 "Filter clogging",
-                 "Energy saving",
-                 "OH",
-                 "Indoor humidity AH",
+                 "Panel temperature 1 - °C",
+                 "Panel temperature 2 - °C",
+                 "Panel humidity RH 1 - %",
+                 "Panel humidity RH 2 - %",
+                 "Supply fan - %",
+                 "Exhaust fan - %",
+                 "SP - mV",
+                 "EP - mV",
+                 "SFI - %",
+                 "EFI - %",
+                 "S1 - mV",
+                 "S2 - mV",
+                 "Heat exchanger - %",
+                 "WC - %",
+                 "Electric heater - %",
+                 "DX - %",
+                 "Air damper - %s",
+                 "Filter clogging - %",
+                 "Energy saving - %",
+                 "OH - g/m³",
+                 "Indoor humidity AH - g/m³",
 
                  # Columns from url/i2.asp
                  "Ventilation level i2",
@@ -51,36 +53,36 @@ excel_headers = [  # Columns from url/det.asp
 
                  # Columns from url/i.asp
                  "Ventilation level i",
-                 "Supply temperature",
-                 "Extract temperature",
-                 "Outdoor temperature",
-                 "SP",
-                 "SAF",
-                 "EAF",
-                 "SAFS",
-                 "EAFS",
-                 "Filter clogging",
-                 "Heat exchanger efficiency",
-                 "Heat recovery",
-                 "Power consumption",
-                 "Heating power",
+                 "Supply temperature - °C",
+                 "Extract temperature - °C",
+                 "Outdoor temperature - °C",
+                 "SP - %",
+                 "SAF - %",
+                 "EAF - %",
+                 "SAFS - %",
+                 "EAFS - %",
+                 "Filter clogging - %",
+                 "Heat exchanger efficiency - %",
+                 "Heat recovery - W",
+                 "Power consumption - W",
+                 "Heating power - W",
                  "Specific power Acutal",
                  "Specific power Day",
-                 "Consumed energy Day",
-                 "Consumed energy Month",
-                 "Consumed energy Total",
-                 "Heating energy Day",
-                 "Heating energy Month",
-                 "Heating energy Total",
-                 "Recovered energy Day",
-                 "Recovered energy Month",
-                 "Recovered energy Total",
-                 "ST",
-                 "ET",
-                 "AQS",
-                 "AQ",
-                 "AHS",
-                 "AH",
+                 "Consumed energy Day - kWh",
+                 "Consumed energy Month - kWh",
+                 "Consumed energy Total - kWh",
+                 "Heating energy Day - kWh",
+                 "Heating energy Month - kWh",
+                 "Heating energy Total - kWh",
+                 "Recovered energy Day - kWh",
+                 "Recovered energy Month - kWh",
+                 "Recovered energy Total - kWh",
+                 "ST - °C",
+                 "ET - °C",
+                 "AQS - %",
+                 "AQ - %",
+                 "AHS - %",
+                 "AH - %",
                  "VF"
                  ]  # all keys to be extracted from xml
 
@@ -170,7 +172,9 @@ def get_vent_stats(komfovent_local_ip, var):
         '# List to append the XML results'
         md_list = []
         for child in root:
-            md_list.append(child.text.strip())
+            '# keep only numbers and .'
+            cleaned = re.sub("[^\d\.]", "", child.text.strip())
+            md_list.append(cleaned)
 
         return md_list
 
