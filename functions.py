@@ -135,7 +135,7 @@ def get_vent_stats(komfovent_local_ip, var):
     '# parse without displaying Chrome'
     options.add_argument("--headless")
     '# UPDATE 9.01.2021 to avoid cannot find Chrome binary error'
-    options.binary_location = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+    #options.binary_location = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
     '# get Chrome driver with path'
     driver = webdriver.Chrome("chromedriver.exe", options=options)
     '# url we want to parse: Komfovent local IP'
