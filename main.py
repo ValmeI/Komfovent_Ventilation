@@ -12,5 +12,5 @@ combined_data_list = get_vent_stats("http://192.168.50.78/", 'det') + \
 '# add today-s date the beginning of the list'
 new_vent_data_list = add_xpos_in_list(today_str, 0, combined_data_list)
 write_to_excel("SampleData", new_vent_data_list)
-print('Success')
+print(f'Success: {today_str}')
 
