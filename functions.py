@@ -10,6 +10,8 @@ import chromedriver_autoinstaller
 
 import re
 
+from selenium.webdriver.common.by import By
+
 '''Check if the current version of chromedriver exists
 and if it doesn't exist, download it automatically,
 then add chromedriver to path'''
@@ -142,7 +144,6 @@ def get_vent_stats(komfovent_local_ip, var):
     url = komfovent_local_ip
     '# get url'
     driver.get(url)
-
     '# Pass file name'
     password_file = 'password'
 
@@ -152,18 +153,18 @@ def get_vent_stats(komfovent_local_ip, var):
         '# If "CONTROL" are found on the top of the page '
         'then we are still logged in (previous session is still active)'
         'so skip the login part and go straight to API, else log in'
-        if len(driver.find_elements_by_class_name('name')):
+        if len(driver.find_elements(By.NAME, 'name')):
             pass
         else:
-            driver.find_element_by_id('i_p').send_keys(password)
-            driver.find_element_by_id('b_s').submit()
+            driver.find_element(By.ID, 'i_p').send_keys(password)
+            driver.find_element(By.ID, 'b_s').submit()
 
         '# get data from direct url API'
         driver.get(url + '//' + var + '.asp')
         '# get page source'
         data = driver.page_source
         '# Get XML part of the source'
-        content = driver.find_element_by_id('webkit-xml-viewer-source-xml').get_attribute("innerHTML")
+        content = driver.find_element(By.ID, 'webkit-xml-viewer-source-xml').get_attribute("innerHTML")
         '# Make page source string to XML'
         tree = ET.ElementTree(ET.fromstring(content))
         '# Get root of xml for the loop'
@@ -173,7 +174,7 @@ def get_vent_stats(komfovent_local_ip, var):
         md_list = []
         for child in root:
             '# keep only numbers and .'
-            cleaned = re.sub("[^\d\.]", "", child.text.strip())
+            cleaned = re.sub('[^\d\.]', "", child.text.strip())
             md_list.append(cleaned)
 
         return md_list
