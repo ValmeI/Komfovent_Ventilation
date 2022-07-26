@@ -153,7 +153,7 @@ def get_vent_stats(komfovent_local_ip, var):
         '# If "CONTROL" are found on the top of the page '
         'then we are still logged in (previous session is still active)'
         'so skip the login part and go straight to API, else log in'
-        if len(driver.find_elements(By.NAME, 'name')):
+        if len(driver.find_elements(By.CLASS_NAME, 'name')):
             pass
         else:
             driver.find_element(By.ID, 'i_p').send_keys(password)
