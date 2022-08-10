@@ -12,4 +12,4 @@ combined_data_list = get_vent_stats(komfovent_local_ip="http://192.168.50.78/", 
 '# add today-s date the beginning of the list'
 new_vent_data_list = add_xpos_in_list(var=today_str, pos=0, input_list=combined_data_list)
 write_to_excel(excel_name="SampleData", list_of_data=new_vent_data_list)
-print(f'Success: {today_str}')
+print(f'Success: {today_str}.....')
