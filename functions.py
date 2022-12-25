@@ -174,9 +174,11 @@ def get_vent_stats(komfovent_local_ip, var):
         md_list = []
         for child in root:
             '# keep only numbers and .'
-            cleaned = re.sub('[^\d\.]', "", child.text.strip())
+            cleaned = re.sub(r'[^\d\.]', "", child.text.strip())
             md_list.append(cleaned)
 
+        '# close Chrome'
+        driver.quit()
         return md_list
 
 
