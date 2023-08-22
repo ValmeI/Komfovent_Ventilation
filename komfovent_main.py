@@ -3,7 +3,7 @@ import datetime
 from functions import get_vent_stats, add_xpos_in_list, write_to_excel
 
 if __name__ == '__main__':
-    print('Starting...')    
+    print('Starting...')
     # Get today's datetime but without milliseconds
     today_str = datetime.datetime.now().isoformat(' ', 'seconds')
 

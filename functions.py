@@ -119,7 +119,7 @@ def get_vent_stats(komfovent_local_ip, var):
     options.add_argument('--no-sandbox')  # Bypass OS security model UPDATE 4.06.2021 problems maybe fixed it
     options.add_argument("--log-level=3")  # Adjust the log level
     options.add_experimental_option('excludeSwitches', ['enable-logging'])  # This line disables the DevTools logging
-    service = Service(executable_path='./chromedriver.exe')
+    service = Service(executable_path="D:\PycharmProjects\chromedriver.exe")
     service.log_path = "null"  # Disable driver logs
     service.enable_logging = False  # Disable driver logs
 
