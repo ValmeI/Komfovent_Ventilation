@@ -1,3 +1,4 @@
+import os
 import re
 import xml.etree.ElementTree as ET
 
@@ -116,9 +117,10 @@ def get_vent_stats(komfovent_local_ip, var):
     options.add_argument("--headless")
     options.add_argument('--no-sandbox')  # Bypass OS security model UPDATE 4.06.2021 problems maybe fixed it
     options.add_argument("--log-level=3")  # Adjust the log level
+    options.add_argument('--disable-gpu')  # Disabling GPU
     options.add_experimental_option('excludeSwitches', ['enable-logging'])  # This line disables the DevTools logging
     #service = Service(executable_path=r"D:\PycharmProjects\chromedriver.exe")
-    service = Service(ChromeDriverManager().install())
+    service = Service(ChromeDriverManager().install(), service_args=["--silent"], log_path=os.devnull)
     service.log_path = "null"  # Disable driver logs
     service.enable_logging = False  # Disable driver logs
 
